@@ -1,0 +1,39 @@
+- name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread)
+  become: true
+  apt:
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  tags:
+    - install
+    - core
+
+- name: Install System Packages 2 (the rest)
+  become: true
+  apt:
+    name: [ "unzip", "curl", "golang", "htop", "lsof", "python3-pip",  "moreutils" ]
+  tags:
+    - install
+    - core
+
+- name: Create dowloads directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/downloads"
+    state: directory
+  tags:
+    - install
+    - core
+
+- name: Create projects directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/projects"
+    state: directory
+  tags:
+    - install
+    - core
+
+- name: create temp directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/temp"
+    state: directory
+  tags:
+    - install
+    - core

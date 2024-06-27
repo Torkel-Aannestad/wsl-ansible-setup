@@ -1,0 +1,7 @@
+- name: Install Productivity Packages
+  become: true
+  apt:
+    name: [ "tmux", "wireshark", "fzf", "xclip", "xsel", "screenkey", "ripgrep", "bat", tree ]
+  tags:
+    - install
+    - productivity

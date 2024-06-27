@@ -1,0 +1,11 @@
+- name: create user for torkel
+  user:
+    name: torkel
+    groups: root
+  tags: core
+
+- name: add ssh key for torkel
+  authorized_keys:
+    user: kyle
+    key: ".ssh/id_ed25519.pub"
+  tags: always

@@ -1,0 +1,37 @@
+- hosts: all
+  pre_tasks:
+  - name: Apt Update 
+    become: true
+    apt:
+      update_cache: true
+      state: present
+    tags:
+      - install
+      - core
+  - name: Apt Upgrade 
+    become: true
+    apt:
+      upgrade: dist
+      state: present
+    tags:
+      - install
+      - core
+
+- hosts: localhost
+  # vars:
+  #   source_key: "./.ssh/id_ed25519"
+  #   dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+  tasks:
+    # - include_tasks: tasks/ssh.yml
+    - include_tasks: tasks/git-setup.yml
+    - include_tasks: tasks/core-setup.yml
+    # - include_tasks: tasks/node-setup.yml
+    # - include_tasks: tasks/npm-packages.yml
+    - include_tasks: tasks/zsh-setup.yml
+    # - include_tasks: tasks/personal-projects.yml
+    # - include_tasks: tasks/nvim-setup.yml
+    # - include_tasks: tasks/brave.yml
+    - include_tasks: tasks/productivity-tools.yml
+    - include_tasks: tasks/dotfiles.yml
+    # - include_tasks: tasks/lsp.yml
+
